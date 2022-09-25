@@ -11,12 +11,15 @@ public class App {
 		
 		SessionFactory factory = new Configuration().configure().buildSessionFactory();
 		
-		//firstLevelCache(factory);
+		firstLevelCache(factory);
 		
 		secondLevelCache(factory);
 		
 		factory.close();
 		
+		SessionFactory factory2 = new Configuration().configure().buildSessionFactory();
+		System.out.println("\nCalling for 17020 diff factory...db called??");
+		System.out.println(factory2.openSession().get(User.class, 17020));
 		
 	}
 
