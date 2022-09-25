@@ -11,11 +11,31 @@ public class App {
 		
 		SessionFactory factory = new Configuration().configure().buildSessionFactory();
 		
-		firstLevelCache(factory);
+		//firstLevelCache(factory);
 		
+		secondLevelCache(factory);
 		
 		factory.close();
 		
+		
+	}
+
+	private static void secondLevelCache(SessionFactory factory) {
+		
+		Session session1 = factory.openSession();
+		System.out.println("\nCalling for 17020 first session...");
+		User user1 = session1.get(User.class, 17020);
+		System.out.println(user1);
+		session1.close();
+		
+		
+		Session session2 = factory.openSession();
+		System.out.println("\nCalling for 17020 second session...DB called??");
+		User user2 = session2.get(User.class, 17020);
+		System.out.println(user2);
+		
+		session1.close();
+
 		
 	}
 
